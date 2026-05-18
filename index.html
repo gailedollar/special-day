@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>HAPPIEST BIRTHYDAY MY BABBII ❤️</title>
+    <title>Happy Birthday, My Love ❤️</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap" rel="stylesheet">
     
@@ -39,21 +39,6 @@
             position: relative;
         }
 
-        .heart-loader {
-            font-size: 3.5rem;
-            animation: heartbeat 1.5s infinite;
-            margin-bottom: 10px;
-        }
-
-        @keyframes heartbeat {
-            0% { transform: scale(1); }
-            20% { transform: scale(1.15); }
-            40% { transform: scale(1); }
-            60% { transform: scale(1.15); }
-            80% { transform: scale(1); }
-            100% { transform: scale(1); }
-        }
-
         .hero h1 {
             font-size: 3rem;
             color: var(--dark-rose);
@@ -63,10 +48,84 @@
         .hero p {
             font-size: 1.2rem;
             max-width: 600px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             line-height: 1.6;
         }
 
+        /* --- INTERACTIVE CSS CANDLE STYLE --- */
+        .candle-container {
+            width: 60px;
+            height: 140px;
+            position: relative;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .candle-container:active {
+            transform: scale(0.95);
+        }
+
+        .wax {
+            width: 24px;
+            height: 70px;
+            position: absolute;
+            bottom: 0;
+            left: 18px;
+            background: repeating-linear-gradient(45deg, #ffb3c1, #ffb3c1 10px, #ffffff 10px, #ffffff 20px);
+            border-radius: 4px;
+            box-shadow: inset -4px 0 6px rgba(0,0,0,0.08), 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        .wick {
+            width: 3px;
+            height: 12px;
+            background-color: #4a3b32;
+            position: absolute;
+            top: 60px;
+            left: 29px;
+            transition: background-color 0.5s;
+        }
+
+        .flame {
+            width: 14px;
+            height: 24px;
+            background: radial-gradient(ellipse at bottom, #ffeb3b 0%, #ff9800 100%);
+            border-radius: 50% 50% 20% 20%;
+            position: absolute;
+            top: 36px;
+            left: 23px;
+            animation: flicker 0.6s infinite alternate;
+            box-shadow: 0 0 20px rgba(255,152,0,0.6);
+            transform-origin: center bottom;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        @keyframes flicker {
+            0% { transform: scale(1) rotate(-2deg); }
+            100% { transform: scale(1.15) rotate(2deg); }
+        }
+
+        /* Blown Out Candle Styles */
+        .candle-container.blown .flame {
+            opacity: 0;
+            transform: scale(0);
+            pointer-events: none;
+        }
+
+        .candle-container.blown .wick {
+            background-color: #111111;
+        }
+
+        #candle-instruction {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--dark-rose);
+            margin-bottom: 25px;
+            transition: color 0.5s;
+        }
+
+        /* Hide scroll button until candle is blown out */
         .scroll-btn {
             background-color: var(--primary-rose);
             color: white;
@@ -75,9 +134,16 @@
             font-size: 1.1rem;
             border-radius: 25px;
             cursor: pointer;
-            transition: transform 0.2s, background-color 0.2s;
+            transition: transform 0.2s, background-color 0.2s, opacity 0.5s;
             box-shadow: 0 4px 15px rgba(255, 123, 144, 0.3);
             font-weight: bold;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .scroll-btn.show {
+            opacity: 1;
+            pointer-events: auto;
         }
 
         .scroll-btn:hover {
@@ -223,10 +289,17 @@
     </div>
 
     <header class="hero">
-        <div class="heart-loader">❤️</div>
-        <h1>HAPPIEST BIRTHYDAY MY BABBII</h1>
-        <p>Happy birthday my love, Wala man ko dira karun pero hope nako kani na pictures nato proof no matter where we are in the world. Always remember na you are love. I love about you.</p>
-        <button class="scroll-btn" onclick="scrollToReasons()">wherever you go i'll be with you ✨</button>
+        <h1>Happy 23rd Birthday!</h1>
+        <p>Every picture tells a story, and every moment with you is my favorite memory.</p>
+        
+        <div class="candle-container" id="birthday-candle" onclick="blowCandle()">
+            <div class="flame"></div>
+            <div class="wick"></div>
+            <div class="wax"></div>
+        </div>
+        <div id="candle-instruction">Make a wish and tap the candle to blow it out! 🎂✨</div>
+
+        <button class="scroll-btn" id="explore-btn" onclick="scrollToReasons()">Look Back Together ✨</button>
     </header>
 
     <main class="grid-container" id="reasons-section">
@@ -237,6 +310,20 @@
     </footer>
 
     <script>
+        // Candle Blowing Logic
+        function blowCandle() {
+            const candle = document.getElementById('birthday-candle');
+            const instruction = document.getElementById('candle-instruction');
+            const button = document.getElementById('explore-btn');
+            
+            if(!candle.classList.contains('blown')) {
+                candle.classList.add('blown');
+                instruction.innerHTML = "AWWW abi nako dili i blow. Hope your wishes come true babiii ";
+                instruction.style.color = "#2e7d32"; // Soft warm success green
+                button.classList.add('show');
+            }
+        }
+
         function scrollToReasons() {
             document.getElementById('reasons-section').scrollIntoView({ behavior: 'smooth' });
         }
@@ -244,17 +331,17 @@
         // --- YOUR 23 PERSONAL REASONS PRESERVED PERFECTLY ---
         const reasons = [
             "I love how you can make my whole day better with just one message",
-            "I love how cute you are when you get mad and turn to angry goblin babii",
-            "I love that even with the distance and everything, you still make me feel loved every day",
-            "I love how bisan mag away ta you always stay by my side",
-            "I love how you always sakay sa akong mga kabuang",
+            "I love how cute you are when you get a little mad or jealous.",
+            "I love that even with the distance, you still make me feel loved every day",
+            "I love how your voice instantly calms me down after a stressful day",
+            "I love how you always stay patient with me even when I’m busy or tired",
             "I love how your smile can make me forget every problem for a while",
             "I love that you became my safe place even from far away",
             "I love how we can talk for hours and still never run out of things to say",
             "I love how supportive you are with my goals and career",
-            "I love that bisan unsa ka ka busy you always make time for me",
+            "I love that you understand the stressful side of my IT life and still stay beside me",
             "I love how you make ordinary moments feel special.",
-            "I love how clingy and sweet you can be sometimes kay mostly angry babiii hehehehe",
+            "I love how clingy and sweet you can be sometimes.",
             "I love the way you laugh at my dumb jokes even when they’re not funny",
             "I love that you always remind me to take care of myself",
             "I love how you make distance feel temporary instead of impossible",
@@ -262,9 +349,9 @@
             "I love that you still choose me even on difficult days.",
             "I love how you became both my girlfriend and my best friend",
             "I love how motivated I become because of you.",
-            "I love that you know my flaws and still love and choose me always",
+            "I love that you know my flaws and still love me anyway",
             "I love the little things you do that you probably don’t even notice",
-            "I love how competitive you are",
+            "I love how imagining our future together makes me genuinely happy",
             "I love you because no matter how far we are, my heart still feels at home with you."
         ];
 
@@ -301,18 +388,16 @@
             heart.classList.add('floating-heart');
             heart.innerText = '❤️';
             heart.style.left = Math.random() * 100 + "vw";
-            heart.style.animationDuration = Math.random() * 3 + 3 + "s"; // Generates sweet variation in speed
-            heart.style.fontSize = Math.random() * 12 + 10 + 'px'; // Random sizes for depth
-            heart.style.opacity = Math.random() * 0.5 + 0.3; // Soft transparency
+            heart.style.animationDuration = Math.random() * 3 + 3 + "s";
+            heart.style.fontSize = Math.random() * 12 + 10 + 'px';
+            heart.style.opacity = Math.random() * 0.5 + 0.3;
             
             document.body.appendChild(heart);
             
-            // Automatically clean up hearts from memory after they exit screen space
             setTimeout(() => {
                 heart.remove();
             }, 6000);
         }
-        // Runs heart generation cycles continuously
         setInterval(createHeart, 400);
     </script>
 </body>
