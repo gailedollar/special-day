@@ -6,6 +6,8 @@
     <meta name="robots" content="noindex, nofollow">
     <title>Happy Birthday, My Love ❤️</title>
     
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --bg-color: #fff9f9;
@@ -20,6 +22,7 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
         /* Hero Screen */
@@ -33,6 +36,7 @@
             background: linear-gradient(135deg, #ffeef0 0%, #fff9f9 100%);
             padding: 20px;
             box-sizing: border-box;
+            position: relative;
         }
 
         .heart-loader {
@@ -79,6 +83,27 @@
         .scroll-btn:hover {
             transform: translateY(-2px);
             background-color: var(--dark-rose);
+        }
+
+        /* Background Music Widget Placement */
+        .music-container {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 12px;
+            border-radius: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .music-container span {
+            font-size: 0.9rem;
+            color: var(--dark-rose);
+            font-weight: bold;
         }
 
         /* Photo Grid */
@@ -149,7 +174,7 @@
             z-index: 10;
         }
 
-        /* Back side: The Message */
+        /* Back side: The Message (Using Elegant Handwritten Style) */
         .card-back {
             background: linear-gradient(135deg, var(--primary-rose), var(--dark-rose));
             color: white;
@@ -157,12 +182,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 30px;
+            padding: 25px;
         }
 
         .card-back p {
-            font-size: 1.15rem;
-            line-height: 1.6;
+            font-family: 'Caveat', cursive;
+            font-size: 1.8rem;
+            line-height: 1.4;
             margin: 0;
         }
 
@@ -173,9 +199,28 @@
             color: var(--dark-rose);
             font-weight: 500;
         }
+
+        /* Falling Hearts Animation Keyframes */
+        @keyframes fall {
+            to {
+                transform: translateY(105vh) rotate(360deg);
+            }
+        }
+        .floating-heart {
+            position: fixed;
+            top: -20px;
+            z-index: 999;
+            pointer-events: none;
+            animation: fall linear forwards;
+        }
     </style>
 </head>
 <body>
+
+    <div class="music-container">
+        <span>🎵 Our Song:</span>
+        <audio id="bg-music" src="our-song.mp3" loop controls style="height: 24px; width: 150px;"></audio>
+    </div>
 
     <header class="hero">
         <div class="heart-loader">❤️</div>
@@ -198,39 +243,39 @@
 
         // --- EDIT YOUR 23 REASONS HERE ---
         const reasons = [
-            "I love how you can make my whole day better with just one message",
-            "I love how cute you are when you get a little mad or jealous.",
-            "I love that even with the distance, you still make me feel loved every day",
-            "I love how your voice instantly calms me down after a stressful day",
-            "I love how you always stay patient with me even when I’m busy or tired",
-            "I love how your smile can make me forget every problem for a while",
-            "I love that you became my safe place even from far away",
-            "I love how we can talk for hours and still never run out of things to say",
-            "I love how supportive you are with my goals and career",
-            "I love that you understand the stressful side of my IT life and still stay beside me",
-            "I love how you make ordinary moments feel special.",
-            "I love how clingy and sweet you can be sometimes.",
-            "I love the way you laugh at my dumb jokes even when they’re not funny",
-            "I love that you always remind me to take care of myself",
-            "I love how you make distance feel temporary instead of impossible",
-            "I love how comfortable silence feels when I’m with you on call.",
-            "I love that you still choose me even on difficult days.",
-            "I love how you became both my girlfriend and my best friend",
-            "I love how motivated I become because of you.",
-            "I love that you know my flaws and still love me anyway",
-            "I love the little things you do that you probably don’t even notice",
-            "I love how imagining our future together makes me genuinely happy",
-            "I love you because no matter how far we are, my heart still feels at home with you."
+            "Reason 1: Change this to your first sweet reason!",
+            "Reason 2: Put your second reason here.",
+            "Reason 3: Type your third reason here.",
+            "Reason 4: Type here...",
+            "Reason 5: Type here...",
+            "Reason 6: Type here...",
+            "Reason 7: Type here...",
+            "Reason 8: Type here...",
+            "Reason 9: Type here...",
+            "Reason 10: Type here...",
+            "Reason 11: Type here...",
+            "Reason 12: Type here...",
+            "Reason 13: Type here...",
+            "Reason 14: Type here...",
+            "Reason 15: Type here...",
+            "Reason 16: Type here...",
+            "Reason 17: Type here...",
+            "Reason 18: Type here...",
+            "Reason 19: Type here...",
+            "Reason 20: Type here...",
+            "Reason 21: Type here...",
+            "Reason 22: Type here...",
+            "Reason 23: Your final grand romantic birthday message! 🎉"
         ];
 
         const gridContainer = document.getElementById('reasons-section');
 
+        // Dynamically build all 23 image cards
         reasons.forEach((reason, index) => {
             const photoNum = index + 1;
             const card = document.createElement('div');
             card.classList.add('card');
             
-            // Notice it now reads .JPEG to perfectly match your file uploads!
             card.innerHTML = `
                 <div class="card-inner">
                     <div class="card-front">
@@ -249,6 +294,26 @@
             
             gridContainer.appendChild(card);
         });
+
+        // --- GENTLE FALLING HEARTS ANIMATION SYSTEM ---
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            heart.innerText = '❤️';
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 3s; // Generates sweet variation in speed
+            heart.style.fontSize = Math.random() * 12 + 10 + 'px'; // Random sizes for depth
+            heart.style.opacity = Math.random() * 0.5 + 0.3; // Soft transparency
+            
+            document.body.appendChild(heart);
+            
+            // Automatically clean up hearts from memory after they exit screen space
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+        // Runs heart generation cycles continuously
+        setInterval(createHeart, 400);
     </script>
 </body>
 </html>
