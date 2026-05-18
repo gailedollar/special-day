@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Happy Birthday, My Love ❤️</title>
+    
+    <style>
+        :root {
+            --bg-color: #fff9f9;
+            --primary-rose: #ff7b90;
+            --dark-rose: #e0536c;
+            --text-color: #4a3b32;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            scroll-behavior: smooth;
+        }
+
+        /* Hero Screen */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #ffeef0 0%, #fff9f9 100%);
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .heart-loader {
+            font-size: 3.5rem;
+            animation: heartbeat 1.5s infinite;
+            margin-bottom: 10px;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            20% { transform: scale(1.15); }
+            40% { transform: scale(1); }
+            60% { transform: scale(1.15); }
+            80% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: var(--dark-rose);
+            margin: 10px 0;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .scroll-btn {
+            background-color: var(--primary-rose);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            font-size: 1.1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            box-shadow: 0 4px 15px rgba(255, 123, 144, 0.3);
+            font-weight: bold;
+        }
+
+        .scroll-btn:hover {
+            transform: translateY(-2px);
+            background-color: var(--dark-rose);
+        }
+
+        /* Photo Grid */
+        .grid-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        /* Photo Flip Card Magic */
+        .card {
+            height: 350px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+            border-radius: 15px;
+        }
+
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .card-front {
+            background-color: #ddd;
+        }
+
+        .card-front img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .photo-number {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: rgba(255, 255, 255, 0.85);
+            color: var(--dark-rose);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        /* Back side: The Message */
+        .card-back {
+            background: linear-gradient(135deg, var(--primary-rose), var(--dark-rose));
+            color: white;
+            transform: rotateY(180deg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .card-back p {
+            font-size: 1.15rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            font-size: 1.2rem;
+            color: var(--dark-rose);
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="heart-loader">❤️</div>
+        <h1>Happy 23rd Birthday!</h1>
+        <p>Every picture tells a story, and every moment with you is my favorite memory. Click on our photos below to reveal 23 things I love about you.</p>
+        <button class="scroll-btn" onclick="scrollToReasons()">Look Back Together ✨</button>
+    </header>
+
+    <main class="grid-container" id="reasons-section">
+        </main>
+
+    <footer>
+        <p>Forever & Always Yours ❤️</p>
+    </footer>
+
+    <script>
+        function scrollToReasons() {
+            document.getElementById('reasons-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // --- EDIT YOUR 23 REASONS HERE ---
+        const reasons = [
+            "I love how you can make my whole day better with just one message",
+            "I love how cute you are when you get a little mad or jealous.",
+            "I love that even with the distance, you still make me feel loved every day",
+            "I love how your voice instantly calms me down after a stressful day",
+            "I love how you always stay patient with me even when I’m busy or tired",
+            "I love how your smile can make me forget every problem for a while",
+            "I love that you became my safe place even from far away",
+            "I love how we can talk for hours and still never run out of things to say",
+            "I love how supportive you are with my goals and career",
+            "I love that you understand the stressful side of my IT life and still stay beside me",
+            "I love how you make ordinary moments feel special.",
+            "I love how clingy and sweet you can be sometimes.",
+            "I love the way you laugh at my dumb jokes even when they’re not funny",
+            "I love that you always remind me to take care of myself",
+            "I love how you make distance feel temporary instead of impossible",
+            "I love how comfortable silence feels when I’m with you on call.",
+            "I love that you still choose me even on difficult days.",
+            "I love how you became both my girlfriend and my best friend",
+            "I love how motivated I become because of you.",
+            "I love that you know my flaws and still love me anyway",
+            "I love the little things you do that you probably don’t even notice",
+            "I love how imagining our future together makes me genuinely happy",
+            "I love you because no matter how far we are, my heart still feels at home with you."
+        ];
+
+        const gridContainer = document.getElementById('reasons-section');
+
+        reasons.forEach((reason, index) => {
+            const photoNum = index + 1;
+            const card = document.createElement('div');
+            card.classList.add('card');
+            
+            // Notice it now reads .JPEG to perfectly match your file uploads!
+            card.innerHTML = `
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="photo-number">Memory #${photoNum}</div>
+                        <img src="${photoNum}.JPEG" alt="Memory ${photoNum}" loading="lazy">
+                    </div>
+                    <div class="card-back">
+                        <p>${reason}</p>
+                    </div>
+                </div>
+            `;
+            
+            card.addEventListener('click', () => {
+                card.classList.toggle('flipped');
+            });
+            
+            gridContainer.appendChild(card);
+        });
+    </script>
+</body>
+</html>
